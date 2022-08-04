@@ -8,7 +8,10 @@ with socket.socket() as s:
     print("Server is started...")
     conn, addr = s.accept()
     print("client = {}:{}".format(addr[0], addr[1]))
-
-    data = conn.recv(1024)
-    conn.send(data)
-    print(data.decode())
+    while(1):
+        data = conn.recv(1024)
+        if data.decode() == "quit":
+            print("quit connect")
+            exit()
+        conn.send(data)
+        print(data.decode())
